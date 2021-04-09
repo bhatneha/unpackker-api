@@ -1,5 +1,5 @@
 GOFMT_FILES?=$$(find . -not -path "./vendor/*" -type f -name '*.go')
-PROJECT_NAME?=unpackker_api
+PROJECT_NAME?=unpackker-api
 APP_DIR?=$$(git rev-parse --show-toplevel)
 VERSION?=0.0.1
 
@@ -23,7 +23,7 @@ local.run: local.build ## Generates the artifact and Runs with the help of 'go r
 golang.lint: ## Lints application for errors, it is a linters aggregator (https://github.com/golangci/golangci-lint).
 	docker run --rm -v ${APP_DIR}:/app -w /app golangci/golangci-lint:v1.27-alpine golangci-lint run --color always
 
-dockerise: docker.lint golang.lint 1`## Containerise the appliction
+dockerise: docker.lint golang.lint ## Containerise the appliction
 	docker build -t ${DOCKER_USER}/${PROJECT_NAME}:${VERSION} .
 
 docker.lint: ## Linting Dockerfile
