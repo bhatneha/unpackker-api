@@ -119,6 +119,6 @@ func download(c *gin.Context) {
 	}
 	_, err = io.Copy(c.Writer, Openfile) //'Copy' the file to the client
 	if err != nil {
-		c.JSON(http.StatusInternalServerError,gin.H{"error":err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 	}
 }

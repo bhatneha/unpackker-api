@@ -4,7 +4,7 @@ pipeline {
         stage ('Lint') {
             steps {
                 echo 'Linting application'
-                sh 'make coverage.lint'
+                sh 'make golang.lint'
             }
         }
         stage ('Build') {

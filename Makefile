@@ -21,7 +21,7 @@ local.run: local.build ## Generates the artifact and Runs with the help of 'go r
 	./${PROJECT_NAME}
 
 golang.lint: ## Lints application for errors, it is a linters aggregator (https://github.com/golangci/golangci-lint).
-	docker run --rm -v ${APP_DIR}:/app -w /app golangci/golangci-lint:v1.27-alpine golangci-lint run --color always
+	golangci-lint run
 
 dockerise: docker.lint golang.lint ## Containerise the appliction
 	docker build -t ${DOCKER_USER}/${PROJECT_NAME}:${VERSION} .
