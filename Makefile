@@ -27,7 +27,7 @@ dockerise: docker.lint golang.lint ## Containerise the appliction
 	docker build -t ${DOCKER_USER}/${PROJECT_NAME}:${VERSION} .
 
 docker.lint: ## Linting Dockerfile
-	docker run --rm -v ${APP_DIR}:/app -w /app hadolint/hadolint:latest-alpine hadolint Dockerfile
+	hadolint Dockerfile
 
 docker.publish.image: docker.login ## Publisies the image to the registered docker registry.
 	docker push ${DOCKER_USER}/${PROJECT_NAME}:${VERSION}
