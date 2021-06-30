@@ -15,6 +15,10 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
+const (
+	unpck = "unpackker"
+)
+
 //Methods implements Pack and Unpack methods to perform packing and unpacking respectively
 type Methods interface {
 	Pack() string
@@ -70,7 +74,6 @@ func (e *ExecCmd) getExecutable() (string, error) {
 
 // Pack invokes a CLI to perform packing of an asset
 func (p *PackkerInput) Pack() (string, error) {
-
 	dir, _ := filepath.Split(p.PackData.AssetPath)
 	p.PackData.Name = fmt.Sprintf("%sunpackker", p.PackData.Name)
 	p.PackData.Path = filepath.Join(dir, "/test")
@@ -84,12 +87,12 @@ func (p *PackkerInput) Pack() (string, error) {
 		log.Println("failed to Marshal", err)
 		return "", err
 	}
-	if err = ioutil.WriteFile(filepath.Join(dir, ".unpackker-config.yaml"), ydata, 0644); err != nil {
+	if err = ioutil.WriteFile(filepath.Join(dir, ".unpackker-config.yaml"), ydata, 0600); err != nil {
 		log.Println("failed to write configurations to file", err)
 		return "", err
 	}
 	cmd := NewExecCmd()
-	cmd.Command = "unpackker"
+	cmd.Command = unpck
 	cmd.Dir = dir
 	cmd.Args = []string{"generate", "."}
 	cmnd, err := cmd.getExecCmd()
@@ -108,7 +111,6 @@ func (p *PackkerInput) Pack() (string, error) {
 
 //Unpack performs unpacking of an asset
 func (u *UnPackkerInput) Unpack() (string, error) {
-
 	return "Unpacked successfully", nil
 }
 

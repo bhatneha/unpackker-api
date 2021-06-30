@@ -9,7 +9,6 @@ type Router struct {
 }
 
 func (r *Router) AllRoutes() {
-
 	v1 := (r.Router).Group("/v1")
 	{
 		v1.POST("/packker", packker)

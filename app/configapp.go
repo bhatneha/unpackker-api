@@ -19,20 +19,17 @@ const (
 )
 
 func (c *ConfigData) configLog() (io.Writer, error) {
-
 	if !statFile(os.Getenv(LogPath)) {
-		return nil, fmt.Errorf("Unable to find the configuration file in the specified path, writing to STDOUT")
+		return nil, fmt.Errorf("unable to find the configuration file in the specified path, writing to STDOUT")
 	}
 	file, err := os.OpenFile(c.LogPath, os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0644)
 	if err != nil {
-		return nil, fmt.Errorf("Unable to open log file, writing to STDOUT")
+		return nil, fmt.Errorf("unable to open log file, writing to STDOUT")
 	}
 	return file, nil
-
 }
 
 func getConfig() (*ConfigData, error) {
-
 	//checking if the environment variable is set
 	if len(os.Getenv(AppConfig)) == 0 {
 		fmt.Fprintf(os.Stdout, "Configuration file was not specified, switching to default configuration!\n")
@@ -67,7 +64,6 @@ func getConfig() (*ConfigData, error) {
 
 //unmarshal the configurations
 func decodeConfig(dconf []byte) (*ConfigData, error) {
-
 	var conf ConfigData
 	if err := json.Unmarshal(dconf, &conf); err != nil {
 		return nil, err

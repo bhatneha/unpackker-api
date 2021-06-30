@@ -2,9 +2,9 @@ FROM golang:alpine as builder
 COPY . /unpackker-api-bin
 WORKDIR /unpackker-api-bin
 ENV GO111MODULE=on
-RUN go mod vendor
-RUN CGO_ENABLED=0 GOOS=linux go build -o unpackker-api
-RUN go get github.com/nikhilsbhat/unpackker
+RUN go mod vendor \
+ && CGO_ENABLED=0 GOOS=linux go build -o unpackker-api \
+ && go get github.com/nikhilsbhat/unpackker
 
 
 FROM golang:alpine

@@ -19,7 +19,6 @@ type Form struct {
 }
 
 func packker(c *gin.Context) {
-
 	var set con.PackkerInput
 	if err := c.ShouldBindJSON(&set); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -31,11 +30,9 @@ func packker(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"response": stat})
-
 }
 
 func unpackker(c *gin.Context) {
-
 	var set con.UnPackkerInput
 	if err := c.ShouldBindJSON(&set); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -51,7 +48,6 @@ func unpackker(c *gin.Context) {
 }
 
 func upload(c *gin.Context) {
-
 	uid := con.GetUinqueID()
 	folder := "/tmp"
 	if err := con.CreateDir(folder, uid); err != nil {
