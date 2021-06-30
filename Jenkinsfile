@@ -4,6 +4,7 @@ pipeline {
         stage ('Lint') {
             steps {
                 echo 'Linting application'
+                sh 'make local.fmt'
                 sh 'make docker.lint'
                 sh 'make golang.lint'
             }
